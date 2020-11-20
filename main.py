@@ -46,15 +46,54 @@ while(bandera):
 		else:
 			path = os.getcwd()
 			d = True
-			while d:
-				print("")
+			print(path,"este es el directorio en el que se encuentra, desea hacer la busqueda en este directorio?")
+			print("1.Si")
+			print("2.No")
+			p = input()
+			os.system("cls")
+			while p != "1" and p !="2":
+				print("Opcion incorrecta\n")
+				print(path,"este es el directorio en el que se encuentra, desea hacer la busqueda en este directorio?")
+				print("1.Si")
+				print("2.No")
+				p = input()
+			os.system("cls")
+			while d and p == "2":
 				solo_dir = [di for di in os.listdir(path) if isdir(join(path,di))]
+				if len(solo_dir) == 0:
+					print("No existen mas directorios, se hara la busqueda en",path)
+					break
+				print("Estos son los directorios a los que se puede ingresar, escoja uno")
 				for i in range(len(solo_dir)):
-					#print(i,solo_dir[i])
-					pass
-				d = False 
-		
-		#ii.buscarIndice(path)
+					print(i,solo_dir[i])
+				i = int(input())
+				path = join(path,solo_dir[i])
+				os.system("cls")
+				print(path,"este es el directorio en el que se encuentra, desea hacer la busqueda en este directorio?")
+				print("1.Si")
+				print("2.No")
+				p = input()
+				while p != "1" and p !="2":
+					print("Opcion incorrecta\n")
+					print(path,"este es el directorio en el que se encuentra, desea hacer la busqueda en este directorio?")
+					print("1.Si")
+					print("2.No")
+					p = input()
+				os.system("cls")
+		d = True
+		print("Ingrese las palabras que desea buscar, si no desea agregar mas palabras haga doble salto de linea")
+		pbuscar = set()
+		while d:
+			a = input()
+			if a == "\n" or a == "":
+				d = False
+			else:
+				pbuscar.add(a)
+		os.system("cls")
+		print("Palabras guardadas")
+		pbuscar = list(pbuscar)
+		print(pbuscar)
+		ii.comprobar(path,pbuscar)
 	elif op == "2":
 		print('Bienvenido a la opcion 2')
 		print()
