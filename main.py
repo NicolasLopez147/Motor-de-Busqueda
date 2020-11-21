@@ -111,6 +111,7 @@ while(bandera):
 		ii.comprobar(path,pbuscar)
 
 	elif op == "2":
+		os.system("cls")
 		print('Bienvenido a la opcion 2')
 		print()
 	else:

@@ -1,5 +1,6 @@
 import os
-from os.path import isdir
+import leer
+from os.path import isdir,join
 def buscarIndice(path,pbuscar):
 	di = os.listdir(path)
 	if "index.pickle" in di:
@@ -13,7 +14,8 @@ def buscarIndice(path,pbuscar):
 def buscar(pbuscar):
 	pass
 def crear(path):
-	pass
+	path = join(path,"Prueba.txt")
+	print(leer.preparar(path))
 def comprobar(path,pbuscar):
 	if isdir(path):
 		print("El directorio si existe")

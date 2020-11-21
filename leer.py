@@ -46,8 +46,6 @@ def comprobar(pbuscar):
 	pbuscar = [palabra.lower() for palabra in pbuscar]
 	return pbuscar
 
-path = os.getcwd()
-path = join(path,"Prueba.txt")
-llaves = comprobar(leer_TXT(path)) 
-llaves = set(llaves)
-print(llaves)
+def preparar (path):
+	llaves = leer_TXT(path)
+	return set(llaves)
