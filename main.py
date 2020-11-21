@@ -69,9 +69,20 @@ while(bandera):
 				print("Estos son los directorios a los que se puede ingresar, escoja uno")
 				for i in range(len(solo_dir)):
 					print(i,solo_dir[i])
-				i = int(input())
-				path = join(path,solo_dir[i])
-				os.system("cls")
+				r = True
+				while r:
+					try:
+						i = int(input())
+						os.system("cls")
+						path = join(path,solo_dir[i])
+						r = False
+					except:
+						os.system("cls")
+						print("Opcion incorrecta\n")
+						print("Estos son los directorios a los que se puede ingresar, escoja uno")
+						for i in range(len(solo_dir)):
+							print(i,solo_dir[i])
+				
 				print(path,"este es el directorio en el que se encuentra, desea hacer la busqueda en este directorio?")
 				print("1.Si")
 				print("2.No")
@@ -106,6 +117,7 @@ while(bandera):
 		os.system("cls")
 		print("Gracias por usar el programa, vuelva pronto")
 		bandera = False
+	print("\n")
 
 	
 	
