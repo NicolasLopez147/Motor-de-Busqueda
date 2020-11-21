@@ -4,8 +4,10 @@ Created on Fri Nov 20 18:36:30 2020
 
 @author: sable
 """
-import pypdf2
-
+import PyPDF2
+import os
+from os.path import join,isfile
+caracteres = [",",".","'","\n",":","\xad"]
 def leer_PDF(arg):
     pdf_file = open(arg)
     read_pdf = pypdf2.PdfFileReader(pdf_file)
@@ -17,14 +19,35 @@ def leer_PDF(arg):
         contenido = contenido + page_content
     contenido.split()
     contenido = set(contenido)
-    return(contenido)
+    return contenido
 
 def leer_TXT(arg):
     archivo = open(arg, "r")
-    contenido = ""
+    contenido = set()
     for linea in archivo.readlines():
-        contenido = contenido + linea
+        linea = linea.split(" ")
+        for palabra in linea:
+            contenido.add(palabra)
     archivo.close() 
-    contenido.split()
-    contenido = set(contenido)
-    return(contenido)
+    contenido = list(contenido)
+    contenido = comprobar(contenido)
+    return contenido
+
+def comprobar(pbuscar):
+	for palabra in pbuscar:
+		for letra in palabra:
+			if letra in caracteres:
+				aux = list(palabra)
+				if palabra in pbuscar:
+					pbuscar.remove(palabra)
+				aux.remove(letra)
+				pbuscar.append("".join(aux))
+
+	pbuscar = [palabra.lower() for palabra in pbuscar]
+	return pbuscar
+
+path = os.getcwd()
+path = join(path,"Prueba.txt")
+llaves = comprobar(leer_TXT(path)) 
+llaves = set(llaves)
+print(llaves)
