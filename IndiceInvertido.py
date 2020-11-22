@@ -15,7 +15,8 @@ def buscar(pbuscar):
 	pass
 def crear(path):
 	path = join(path,"Prueba.txt")
-	print(leer.preparar(path))
+	llaves = leer.preparar(path)
+	print(llaves)
 def comprobar(path,pbuscar):
 	if isdir(path):
 		print("El directorio si existe")
