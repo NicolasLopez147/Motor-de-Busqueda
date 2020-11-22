@@ -8,7 +8,7 @@ import PyPDF2
 import os
 from os.path import join,isfile
 caracteres = [",",".","'","\n",":","\xad","!"]
-palabras_no_deseadas = ["de","la","con","un","una","unos","unas","el"]
+palabras_no_deseadas = ["de","la","con","un","una","unos","unas","el","","ellos"]
 def leer_PDF(arg):
     pdf_file = open(arg)
     read_pdf = pypdf2.PdfFileReader(pdf_file)
