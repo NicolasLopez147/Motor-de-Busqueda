@@ -19,7 +19,6 @@ def buscar(path,pbuscar):
 	fichero = open(fpath,'rb')
 	iInvertido = pickle.load(fichero)
 	fichero.close()
-	
 	archivos_encontrados = set()
 	for p in pbuscar:
 		if p in iInvertido.keys():
@@ -27,19 +26,37 @@ def buscar(path,pbuscar):
 		else:
 			print("No se encontro ninguna referencia a la palabra '{palabra}'".format(palabra=p))
 	archivos_encontrados = list(archivos_encontrados)
-	parchivo = join(path,archivos_encontrados[1])
-	os.startfile(parchivo)
+	if len(archivos_encontrados) == 0:
+		print("No se encontraron documentos que referencien las palabras ingresadas")
+		return 0
+	
+	while True:
+		print("Estos son los archivos encontrados, escoja uno")
+		for i in range(len(archivos_encontrados)):
+			print(i,archivos_encontrados[i])
+		print(len(archivos_encontrados),"Volver al menu principal")
+		try:
+			op = int(input())
+			os.system("cls")
+			if op == len(archivos_encontrados):
+				os.system("cls")
+				return 0
+			parchivo = join(path,archivos_encontrados[op])
+			os.startfile(parchivo)
+		except:
+			os.system("cls")
+			print("Opcion incorrecta\n")
+
 
 def crear(path):
 	di = os.listdir(path)
 	archivostxt = glob.glob(join(path,"*.txt"))
 	archivospdf = glob.glob(join(path,"*.pdf"))
-	llaves = set()
 	iInvertido = {}
 	for atxt in archivostxt:
-		llaves.update(leer.preparar(atxt,"txt"))
+		llaves = set()
+		llaves = leer.preparar(atxt,"txt")
 		archivo = str(os.path.split(atxt)[1])
-		print(archivo)
 		for l in llaves:
 			if l not in iInvertido.keys():
 				iInvertido[l] = {archivo}

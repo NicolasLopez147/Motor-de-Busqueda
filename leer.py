@@ -51,5 +51,6 @@ def preparar (path,tipo):
 	if tipo == "txt":
 		llaves = leer_TXT(path)
 	if tipo == "pdf":
-		llaves = leer_PDF(path)
+		pass
+		#llaves = leer_PDF(path)
 	return set(llaves)
