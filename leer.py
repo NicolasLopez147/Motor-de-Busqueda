@@ -47,6 +47,9 @@ def comprobar(pbuscar):
 	pbuscar = [palabra.lower() for palabra in pbuscar]
 	return pbuscar
 
-def preparar (path):
-	llaves = leer_TXT(path)
+def preparar (path,tipo):
+	if tipo == "txt":
+		llaves = leer_TXT(path)
+	if tipo == "pdf":
+		llaves = leer_PDF(path)
 	return set(llaves)
