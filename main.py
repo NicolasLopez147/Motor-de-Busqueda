@@ -97,16 +97,15 @@ while(bandera):
 					os.system("cls")
 		d = True
 		print("Ingrese las palabras que desea buscar, si no desea agregar mas palabras haga doble salto de linea")
-		pbuscar = set()
+		pbuscar = []
 		while d:
 			a = input()
-			if a == "\n" or a == "":
+			if  a == "":
 				d = False
 			else:
-				pbuscar.add(a)
+				pbuscar +=a.split(" ")
 		os.system("cls")
 		print("Palabras guardadas")
-		pbuscar = list(pbuscar)
 		print(pbuscar)
 		ii.comprobar(path,pbuscar)
 

@@ -19,15 +19,24 @@ def buscar(path,pbuscar):
 	fichero = open(fpath,'rb')
 	iInvertido = pickle.load(fichero)
 	fichero.close()
+	for k,v in iInvertido.items():
+		if k in pbuscar :
+			print(k,":")
+			print(v)
+	pbuscar = leer.comprobar(pbuscar)
 	archivos_encontrados = set()
 	for p in pbuscar:
 		if p in iInvertido.keys():
-			archivos_encontrados.update(iInvertido[p])
+			if archivos_encontrados == set():
+				archivos_encontrados = iInvertido[p]
+			else:
+				archivos_encontrados  = archivos_encontrados & iInvertido[p]
 		else:
 			print("No se encontro ninguna referencia a la palabra '{palabra}'".format(palabra=p))
+			archivos_encontrados = set()
 	archivos_encontrados = list(archivos_encontrados)
 	if len(archivos_encontrados) == 0:
-		print("No se encontraron documentos que referencien las palabras ingresadas")
+		print("No se encontraron documentos que referencien todas las palabras ingresadas")
 		return 0
 	
 	while True:

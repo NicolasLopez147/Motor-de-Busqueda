@@ -7,8 +7,8 @@ Created on Fri Nov 20 18:36:30 2020
 import PyPDF2
 import os
 from os.path import join,isfile
-caracteres = [",",".","'","\n",":","\xad","!"]
-palabras_no_deseadas = ["de","la","con","un","una","unos","unas","el","","ellos"]
+caracteres = {",",".","'","\n",":","\xad","!","?","¡","¿","/","@","«","»"}
+#palabras_no_deseadas = ["de","la","con","un","una","unos","unas","el","","ellos"]
 def leer_PDF(arg):
     pdf_file = open(arg)
     read_pdf = pypdf2.PdfFileReader(pdf_file)
@@ -23,29 +23,26 @@ def leer_PDF(arg):
     return contenido
 
 def leer_TXT(arg):
-    archivo = open(arg, "r")
+    archivo = open(arg, "r",encoding="utf-8")
     contenido = set()
     for linea in archivo.readlines():
         linea = linea.split(" ")
         for palabra in linea:
             contenido.add(palabra)
-    archivo.close() 
+    archivo.close()
     contenido = list(contenido)
     contenido = comprobar(contenido)
     return contenido
 
-def comprobar(pbuscar):
-	for palabra in pbuscar:
-		for letra in palabra:
+def comprobar(contenido):
+	for i in range(len(contenido)):
+		for letra in contenido[i]:
 			if letra in caracteres:
-				aux = list(palabra)
-				if palabra in pbuscar:
-					pbuscar.remove(palabra)
-				aux.remove(letra)
-				pbuscar.append("".join(aux))
+				contenido[i] = contenido[i].replace(letra,"")
 
-	pbuscar = [palabra.lower() for palabra in pbuscar]
-	return pbuscar
+	contenido = [palabra.lower() for palabra in contenido]
+	contenido = list(set(contenido))
+	return contenido
 
 def preparar (path,tipo):
 	if tipo == "txt":
