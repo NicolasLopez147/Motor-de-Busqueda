@@ -1,27 +1,25 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 20 18:36:30 2020
 
-@author: sable
-"""
-import PyPDF2
 import os
 from os.path import join,isfile
 caracteres = {",",".","'","\n",":","\xad","!","?","¡","¿","/","@","«","»",";","",'"',"(",")","|"}
 #palabras_no_deseadas = ["de","la","con","un","una","unos","unas","el","","ellos"]
+
 def leer_PDF(arg):
-    pdf_file = open(arg,encoding = "utf-8")
-    read_pdf = pypdf2.PdfFileReader(pdf_file)
-    number_of_pages = read_pdf.getNumPages()
+    from PyPDF2 import PdfFileReader
+    pdf_document = arg,".pdf"  
     contenido = ""
-    for i in range(number_of_pages - 1):
-        page = read_pdf.getPage(i)
-        page_content = page.extractText()
-        contenido = contenido + page_content
-    pdf_file.close()
-    contenido.split()
-    contenido = set(contenido)
-    return contenido
+    with open(pdf_document, "rb") as filehandle:  
+        pdf = PdfFileReader(filehandle)
+        pages = pdf.getNumPages()
+
+        for i in range(pages - 1):
+            page1 = pdf.getPage(i)
+            page_content = page1.extractText()
+            contenido = contenido + page_content
+        contenido = contenido.split(" ")
+        contenido = set(contenido)
+        return(contenido)
 
 def leer_TXT(arg):
     archivo = open(arg, "r",encoding="utf-8")
@@ -52,3 +50,4 @@ def preparar (path,tipo):
 		pass
 		#llaves = leer_PDF(path)
 	return set(llaves)
+
