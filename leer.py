@@ -2,7 +2,7 @@
 
 import os
 from os.path import join,isfile
-caracteres = {",",".","'","\n",":","\xad","!","?","¡","¿","/","@","«","»",";","",'"',"(",")","|"}
+caracteres = {",",".","'","\n",":","\xad","!","?","¡","¿","/","@","«","»",";","",'"',"(",")","|","-","_","[","]"}
 #palabras_no_deseadas = ["de","la","con","un","una","unos","unas","el","","ellos"]
 
 def leer_PDF(arg):
@@ -43,7 +43,6 @@ def comprobar(contenido):
 
 	contenido = [palabra.lower() for palabra in contenido]
 	contenido = list(set(contenido))
-	####
 	return contenido
 
 def preparar (path,tipo):

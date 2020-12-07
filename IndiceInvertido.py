@@ -7,26 +7,35 @@ from os import startfile
 from os import remove
 
 def buscarIndice(path,pbuscar):
-            di = os.listdir(path)
-            if "index.pickle" in di:
-                    print("El índice ya existe, ¿Desea actualizarlo?"+'\n'+"1. Sí"+'\n'+"2. No")
-                    a=input()
-                    if a =="1":                    
-                            print("El índice será actualizado, espere un momento.\n")
-                            remove(path+"/index.pickle")
-                            crear(path)
-                            buscar(path,pbuscar)
-                    else: buscar(path,pbuscar)
-            else:
-                    print("El índice será creado, espere un momento.\n")
-                    crear(path)
-                    buscar(path,pbuscar)
+    di = os.listdir(path)
+    if "index.pickle" in di:
+        print("El índice ya existe, ¿Desea actualizarlo?"+'\n'+"1. Sí"+'\n'+"2. No")
+        a=input()
+        while a!="1" and a !="2":
+            os.system("cls")
+            print("Opcion incorrecta")
+            print("El índice ya existe, ¿Desea actualizarlo?"+'\n'+"1. Sí"+'\n'+"2. No")
+            a=input()
+        if a =="1":                    
+            print("El índice será actualizado, espere un momento.\n")
+            remove(path+"/index.pickle")
+            crear(path)
+            buscar(path,pbuscar)
+        else: buscar(path,pbuscar)
+
+    else:
+        print("El índice será creado, espere un momento.\n")
+        crear(path)
+        buscar(path,pbuscar)
 
 def buscar(path,pbuscar):
     fpath = join(path,"index.pickle")
     fichero = open(fpath,'rb')
     iInvertido = pickle.load(fichero)
     fichero.close()
+    for k,v in iInvertido.items():
+    	print(k,":")
+    	print(v)
     pbuscar = leer.comprobar(pbuscar)
     archivos_encontrados = set()
     for p in pbuscar:
@@ -54,15 +63,18 @@ def buscar(path,pbuscar):
                     if op == 1:
                             os.system("cls")
                             return 0
-                    parchivo = join(path,archivos_encontrados[op-2])
-                    os.startfile(parchivo)
+                    if op-2 < 0 :
+                        os.system("cls")
+                        print("Opcion incorrecta\n")
+                    else:
+                        parchivo = join(path,archivos_encontrados[op-2])
+                        os.startfile(parchivo)
             except:
                     os.system("cls")
                     print("Opcion incorrecta\n")
 
 
 def crear(path):
-    di = os.listdir(path)
     archivostxt = glob.glob(join(path,"*.txt"))
     archivospdf = glob.glob(join(path,"*.pdf"))
     iInvertido = {}

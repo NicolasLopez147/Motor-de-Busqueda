@@ -46,20 +46,26 @@ while(bandera):
             a = input()
             os.system("cls")
             while a != "1" and a != "2":
-                    print("Opcion incorrecta\n")
-                    print('1.Ingresar una ruta')
-                    print('2.Utilizar la ruta por defecto:',pathin)
-                    a = input()
-                    os.system("cls")
+                print("Opcion incorrecta\n")
+                print('1.Ingresar una ruta')
+                print('2.Utilizar la ruta por defecto:',pathin)
+                a = input()
+                os.system("cls")
             if a == "1":
-                    print('Ingrese la ruta del directorio en el que desea hacer la búsqueda:')
-                    path = input()
-            else:path=pathin
-            os.system("cls")
+                print('Ingrese la ruta del directorio en el que desea hacer la búsqueda:')
+                path = input()
+                os.system("cls")
+                if not isdir(path):
+                    print("La ruta ingresada no es valida")
+                    path = ""
+            else:
+            	path=pathin
+            	os.system("cls")
     elif op == "2":
-            if pathbus!="" or pathbus!=pathin:pass
-            elif path!="" and pathbus=="":pathbus=path
-            else:pathbus=pathin
+    	if path == "" and pathbus == "":
+    		print("Se debe seleccionar un directorio antes de hacer una busqueda")
+    	else:
+            pathbus = path
             print("El directorio en el que se realizará la búsqueda es:", pathbus)
             print("¿Desea realizar la búsqueda en este directorio?"+'\n'+"1. Sí"+'\n'+"2. No, ingresar ruta")
             b = input()
@@ -73,23 +79,31 @@ while(bandera):
             if b=="2":
                 print('Ingrese la ruta del directorio en el que desea hacer la busqueda:')
                 pathbus = input()
-                os.system("cls")
-            print("Ingrese las palabras que desea buscar, cada vez que agregué una palabra haga salto de línea. Si no desea agregar más palabras haga doble salto de línea")
-            pbuscar = set()
-            while True:
-                    a = input()
-                    if a == "\n" or a == "":
-                            break
-                    else:
-                            pbuscar.add(a)
-            os.system("cls")
-            print("Palabras guardadas:")
-            pbuscar = list(pbuscar)
-            for i in range (len(pbuscar)):
-                if i==0:print(pbuscar[i],end="")
-                else:print(", "+pbuscar[i],end="")
-            print(".\n")
-            ii.comprobar(pathbus,pbuscar)        
+                if not isdir(pathbus):
+                    print("La ruta ingresada no es valida")
+                    pathbus = ""
+                else:
+                	path = pathbus
+            if pathbus!= "":
+	            os.system("cls")
+	            print("Ingrese las palabras que desea buscar. Si no desea agregar más palabras haga doble salto de línea")
+	            pbuscar = []
+	            while True:
+	                a = input()
+	                if a == "":
+	                    break
+	                else:
+	                    pbuscar +=a.split(" ")
+	            os.system("cls")
+	            if len(pbuscar) == 0:
+	            	print("No se ingreso ninguna palabra")
+	            else:
+		            print("Palabras guardadas:")
+		            for i in range (len(pbuscar)):
+		                if i==0:print(pbuscar[i],end="")
+		                else:print(", "+pbuscar[i],end="")
+		            print("\n")
+		            ii.comprobar(pathbus,pbuscar)
     elif op == "3":
             print('Bienvenido a los créditos.'+'\n')
             print("Este Software fue diseñado como un proyecto de la Universidad Nacional de Colombia por los estudiantes:", cre)
