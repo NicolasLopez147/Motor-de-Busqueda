@@ -2,122 +2,98 @@ import os
 import os.path as pt
 from os.path import isdir, join
 import IndiceInvertido as ii
+pathbus,pathin,path,bandera="",os.getcwd(),"",True
+cre="""
+Jimmy Joseph Jiménez Alvarado (Estudiante de ingeniería electrónica)
+Julián Andrés Córdoba (Estudiante de ingeniería de sistemas)
+Nicolás López Nieto (Estudiante de ingeniería de sistemas)
 
+Este proyecto fue inspirado por el ingenierio Edwin Andrés Niño Velásquez.
+"""
 os.system("cls")
 print('''
-    _________
-   |    __   \            
-   |   |  |   | __                                  __    _
-   |   |__|   ||__|                                |__|  | |
-   |    __    | __  ___  _ _____     __ ___  _ ___  __   | |_____
-   |   |  |   ||  |/ _ ]| '_  \ \   / // _ ]| '_  \|  |__| |  _  |
-   |   |__|   ||  |  __/| | | |\ \_/ /|  __/| | | ||  | __ | |_| |
-   |_________/ |__|\___||_| |_| \___/  \___||_| |_||__|____|_____|
-	''')
-bandera = True
+_________
+|    __   \            
+|   |  |   | __                                  __    _
+|   |__|   ||__|                                |__|  | |
+|    __    | __  ___  _ _____     __ ___  _ ___  __   | |_____
+|   |  |   ||  |/ _ ]| '_  \ \   / // _ ]| '_  \|  |__| |  _  |
+|   |__|   ||  |  __/| | | |\ \_/ /|  __/| | | ||  | __ | |_| |
+|_________/ |__|\___||_| |_| \___/  \___||_| |_||__|____|_____|
+''')
+print("Este programa le permite filtrar archivos .pdf y .txt según algunas palabras, seleccione las opciones que desea ingresando los valores dados. Se recomienda correr el programa en la consola de su ordenador\n")
 while(bandera):
-	print("MENU")
-	print("1.Seleccion del directorio de busqueda")
-	print("2.Creditos")
-	print("3.Salir")
-	op = input("Ingrese la opcion que desee ")
-	os.system("cls")
-	while op != "1" and op != "2" and op!="3":
-		print("Opcion incorrecta\n")
-		print("MENU")
-		print("1.Hacer una busqueda")
-		print("2.Creditos")
-		print("3.Salir")
-		op = input("Ingrese la opcion que desee ")
-		os.system("cls")
-
-	if op == "1" :
-		print('1.Ingresar una ruta')
-		print('2.Utilizar la ruta por defecto')
-		a = input()
-		os.system("cls")
-		while a != "1" and a != "2":
-			print("Opcion incorrecta\n")
-			print('1.Ingresar una ruta')
-			print('2.Utilizar la ruta por defecto')
-			a = input()
-			os.system("cls")
-		if a == "1":
-			print('Ingrese la ruta del directorio en el que desea hacer la busqueda')
-			path = input()
-			os.system("cls")
-		else:
-			path = os.getcwd()
-			d = True
-			print(path,"este es el directorio en el que se encuentra, desea hacer la busqueda en este directorio?")
-			print("1.Si")
-			print("2.No")
-			p = input()
-			os.system("cls")
-			while p != "1" and p !="2":
-				print("Opcion incorrecta\n")
-				print(path,"este es el directorio en el que se encuentra, desea hacer la busqueda en este directorio?")
-				print("1.Si")
-				print("2.No")
-				p = input()
-				os.system("cls")
-			while d and p == "2":
-				solo_dir = [di for di in os.listdir(path) if isdir(join(path,di))]
-				if len(solo_dir) == 0:
-					print("No existen mas directorios, se hara la busqueda en",path)
-					break
-				print("Estos son los directorios a los que se puede ingresar, escoja uno")
-				for i in range(len(solo_dir)):
-					print(i,solo_dir[i])
-				r = True
-				while r:
-					try:
-						i = int(input())
-						os.system("cls")
-						path = join(path,solo_dir[i])
-						r = False
-					except:
-						os.system("cls")
-						print("Opcion incorrecta\n")
-						print("Estos son los directorios a los que se puede ingresar, escoja uno")
-						for i in range(len(solo_dir)):
-							print(i,solo_dir[i])
-				
-				print(path,"este es el directorio en el que se encuentra, desea hacer la busqueda en este directorio?")
-				print("1.Si")
-				print("2.No")
-				p = input()
-				os.system("cls")
-				while p != "1" and p !="2":
-					print("Opcion incorrecta\n")
-					print(path,"este es el directorio en el que se encuentra, desea hacer la busqueda en este directorio?")
-					print("1.Si")
-					print("2.No")
-					p = input()
-					os.system("cls")
-		d = True
-		print("Ingrese las palabras que desea buscar, si no desea agregar mas palabras haga doble salto de linea")
-		pbuscar = []
-		while d:
-			a = input()
-			if  a == "":
-				d = False
-			else:
-				pbuscar +=a.split(" ")
-		os.system("cls")
-		print("Palabras guardadas")
-		print(pbuscar)
-		ii.comprobar(path,pbuscar)
-
-	elif op == "2":
-		os.system("cls")
-		print('Bienvenido a la opcion 2')
-		print()
-	else:
-		os.system("cls")
-		print("Gracias por usar el programa, vuelva pronto")
-		bandera = False
-	print("\n")
-
-	
-	
+    
+    print("\nMENÚ")
+    print("1. Selección del directorio de búsqueda")
+    print("2. Hacer una búsqueda")
+    print("3. Créditos")
+    print("4. Salir")
+    op = input('\n'+"Ingrese el número de la opción que desee: ")
+    os.system("cls")
+    while op != "1" and op != "2" and op!="3" and op!="4":
+            print("Opción incorrecta\n")
+            print("MENÚ")
+            print("1. Selección del directorio de búsqueda")
+            print("2. Hacer una búsqueda")
+            print("3. Créditos")
+            print("4. Salir")
+            op = input("\nIngrese el número de la opción que desee: ")
+            os.system("cls")
+    if op == "1" :
+            print('1. Ingresar una ruta')
+            print('2. Utilizar la ruta por defecto:','"'+pathin+'"')
+            a = input()
+            os.system("cls")
+            while a != "1" and a != "2":
+                    print("Opcion incorrecta\n")
+                    print('1.Ingresar una ruta')
+                    print('2.Utilizar la ruta por defecto:',pathin)
+                    a = input()
+                    os.system("cls")
+            if a == "1":
+                    print('Ingrese la ruta del directorio en el que desea hacer la búsqueda:')
+                    path = input()
+            else:path=pathin
+            os.system("cls")
+    elif op == "2":
+            if pathbus!="" or pathbus!=pathin:pass
+            elif path!="" and pathbus=="":pathbus=path
+            else:pathbus=pathin
+            print("El directorio en el que se realizará la búsqueda es:", pathbus)
+            print("¿Desea realizar la búsqueda en este directorio?"+'\n'+"1. Sí"+'\n'+"2. No, ingresar ruta")
+            b = input()
+            os.system("cls")
+            while b != "1" and b !="2":
+                    print("Opcion incorrecta\n")
+                    print("\nEl directorio en el que se realizará la búsqueda es:", pathbus)
+                    print("¿Desea utilizar este directorio?"+'\n'+"1. Sí"+'\n'+"2. No, seleccionar directorio")
+                    b = input()
+                    os.system("cls")
+            if b=="2":
+                print('Ingrese la ruta del directorio en el que desea hacer la busqueda:')
+                pathbus = input()
+                os.system("cls")
+            print("Ingrese las palabras que desea buscar, cada vez que agregué una palabra haga salto de línea. Si no desea agregar más palabras haga doble salto de línea")
+            pbuscar = set()
+            while True:
+                    a = input()
+                    if a == "\n" or a == "":
+                            break
+                    else:
+                            pbuscar.add(a)
+            os.system("cls")
+            print("Palabras guardadas:")
+            pbuscar = list(pbuscar)
+            for i in range (len(pbuscar)):
+                if i==0:print(pbuscar[i],end="")
+                else:print(", "+pbuscar[i],end="")
+            print(".\n")
+            ii.comprobar(pathbus,pbuscar)        
+    elif op == "3":
+            print('Bienvenido a los créditos.'+'\n')
+            print("Este Software fue diseñado como un proyecto de la Universidad Nacional de Colombia por los estudiantes:", cre)
+    else:
+            os.system("cls")
+            print("Gracias por usar el programa, vuelva pronto.")
+            bandera = False

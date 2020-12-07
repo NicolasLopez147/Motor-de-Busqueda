@@ -7,7 +7,7 @@ caracteres = {",",".","'","\n",":","\xad","!","?","¡","¿","/","@","«","»",";
 
 def leer_PDF(arg):
     from PyPDF2 import PdfFileReader
-    pdf_document = arg,".pdf"  
+    pdf_document = arg  
     contenido = ""
     with open(pdf_document, "rb") as filehandle:  
         pdf = PdfFileReader(filehandle)
@@ -19,6 +19,8 @@ def leer_PDF(arg):
             contenido = contenido + page_content
         contenido = contenido.split(" ")
         contenido = set(contenido)
+        contenido = list(contenido)
+        contenido=comprobar(contenido)
         return(contenido)
 
 def leer_TXT(arg):
@@ -41,13 +43,13 @@ def comprobar(contenido):
 
 	contenido = [palabra.lower() for palabra in contenido]
 	contenido = list(set(contenido))
+	####
 	return contenido
 
 def preparar (path,tipo):
 	if tipo == "txt":
 		llaves = leer_TXT(path)
 	if tipo == "pdf":
-		pass
-		#llaves = leer_PDF(path)
+		llaves = leer_PDF(path)
 	return set(llaves)
 
