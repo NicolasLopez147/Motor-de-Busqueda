@@ -33,9 +33,6 @@ def buscar(path,pbuscar):
     fichero = open(fpath,'rb')
     iInvertido = pickle.load(fichero)
     fichero.close()
-    for k,v in iInvertido.items():
-    	print(k,":")
-    	print(v)
     pbuscar = leer.comprobar(pbuscar)
     archivos_encontrados = set()
     for p in pbuscar:
