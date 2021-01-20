@@ -1,5 +1,4 @@
 import os.path
-import leer
 import glob
 from os.path import isdir,join
 import pickle

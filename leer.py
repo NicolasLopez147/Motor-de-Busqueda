@@ -13,7 +13,7 @@ def leer_PDF(arg):
         pdf = PdfFileReader(filehandle)
         pages = pdf.getNumPages()
 
-        for i in range(pages - 1):
+        for i in range(pages):
             page1 = pdf.getPage(i)
             page_content = page1.extractText()
             contenido = contenido + page_content
